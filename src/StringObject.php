@@ -5,6 +5,12 @@ namespace alcamo\string;
 use alcamo\exception\{OutOfRange, ReadonlyViolation};
 
 /**
+ * @namespace alcamo::string
+ *
+ * @brief Objects behaving as strings
+ */
+
+/**
  * @brief Class that behaves much like a string
  *
  * All positions are counted in bytes, not in characters. This makes a
