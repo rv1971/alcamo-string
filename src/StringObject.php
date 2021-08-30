@@ -27,7 +27,7 @@ class StringObject implements \ArrayAccess, \Countable
         $this->text_ = $text;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->text_;
     }
