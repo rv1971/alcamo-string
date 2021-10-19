@@ -38,7 +38,7 @@ class StringObjectTest extends TestCase
 
         $this->expectException(OutOfRange::class);
         $this->expectExceptionMessage(
-            "Value \"$len\" out of range [0, " . ($len - 1) . "]"
+            "Value $len out of range [0, " . ($len - 1) . "]"
         );
 
         $string[$len] = 'a';

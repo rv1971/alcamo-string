@@ -22,7 +22,12 @@ abstract class AbstractEnum extends ReadonlyStringObject
         if (!in_array($value, static::VALUES)) {
             /** @throw alcamo::exception::InvalidEnumerator if $value is not
              *  in @ref VALUES. */
-            throw new InvalidEnumerator($value, static::VALUES);
+            throw (new InvalidEnumerator())->setMessageContext(
+                [
+                    'value' => $value,
+                    'expectedOneOf' => static::VALUES
+                ]
+            );
         }
 
         parent::__construct($value);

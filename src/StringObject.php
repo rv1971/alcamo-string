@@ -56,7 +56,13 @@ class StringObject implements \ArrayAccess, \Countable
         if (!isset($this->text_[$offset])) {
             /** @throw alcamo::exception::OutOfRange when attempting to modify
              *  a position outside of the existing string. */
-            throw new OutOfRange($offset, 0, strlen($this->text_) - 1);
+            throw (new OutOfRange())->setMessageContext(
+                [
+                    'value' => $offset,
+                    'lowerBound' => 0,
+                    'upperBound' => strlen($this->text_) - 1
+                ]
+            );
         }
 
         $this->text_[$offset] = $value;
@@ -64,11 +70,9 @@ class StringObject implements \ArrayAccess, \Countable
 
     public function offsetUnset($offset)
     {
-        /** @throw alcamo::exception::ReadonlyViolation in ever invocation
-         *  unsetting single positions is not supported. */
+        /** @throw alcamo::exception::ReadonlyViolation in every invocation
+         *  since unsetting single positions is not supported. */
         throw new ReadonlyViolation(
-            $this,
-            __FUNCTION__,
             'Attempt to use ' . __CLASS__ . '::' . __FUNCTION__ . '()'
         );
     }

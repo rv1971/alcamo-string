@@ -37,7 +37,7 @@ class AbstractEnumTest extends TestCase
     {
         $this->expectException(InvalidEnumerator::class);
         $this->expectExceptionMessage(
-            'Invalid value "Foo", expected one of: "foo", "bar-baz", "qux1", "42"'
+            'Invalid value "Foo", expected one of ["foo", "bar-baz", "qux1", "42"]'
         );
 
         new Foo('Foo');
