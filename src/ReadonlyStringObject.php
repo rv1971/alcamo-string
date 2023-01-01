@@ -2,7 +2,7 @@
 
 namespace alcamo\string;
 
-use alcamo\collection\PreventWriteArrayAccessTrait;
+use alcamo\exception\ReadonlyViolation;
 
 /**
  * @brief Class that behaves much like a readonly string
@@ -11,5 +11,17 @@ use alcamo\collection\PreventWriteArrayAccessTrait;
  */
 class ReadonlyStringObject extends StringObject
 {
-    use PreventWriteArrayAccessTrait;
+    public function offsetSet($offset, $value)
+    {
+        /** @throw alcamo::exception::ReadonlyViolation in every
+         *  invocation. */
+        throw new ReadonlyViolation();
+    }
+
+    public function offsetUnset($offset)
+    {
+        /** @throw alcamo::exception::ReadonlyViolation in every
+         *  invocation. */
+        throw new ReadonlyViolation();
+    }
 }
