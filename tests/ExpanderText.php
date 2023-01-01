@@ -11,8 +11,6 @@ class ExpanderText extends TestCase
      */
     public function testExpand($text, $data, $format, $expectedResult): void
     {
-        $expander = new Expander($data, $format);
-
         $this->assertSame(
             $expectedResult,
             Expander::expand($text, $data, $format)
