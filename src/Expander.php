@@ -13,6 +13,14 @@ class Expander
 
     private $replaceMap_ = []; ///< Map of strings to replacement strings
 
+    public static function expand(
+        string $text,
+        iterable $data,
+        string $format = self::PSR3_FORMAT
+    ): string {
+        return (new static($data, $format))->expand($text);
+    }
+
     /**
      * @param $data map of placeholder names to values.
      *
