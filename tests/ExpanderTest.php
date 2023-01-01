@@ -4,7 +4,7 @@ namespace alcamo\string;
 
 use PHPUnit\Framework\TestCase;
 
-class ExpanderText extends TestCase
+class ExpanderTest extends TestCase
 {
     /**
      * @dataProvider expandProvider
@@ -13,7 +13,12 @@ class ExpanderText extends TestCase
     {
         $this->assertSame(
             $expectedResult,
-            Expander::expand($text, $data, $format)
+            (new Expander($data, $format))->expand($text)
+        );
+
+        $this->assertSame(
+            $expectedResult,
+            Expander::simpleExpand($text, $data, $format)
         );
     }
 
