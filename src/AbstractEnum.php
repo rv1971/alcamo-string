@@ -9,9 +9,9 @@ use alcamo\exception\InvalidEnumerator;
  * @ref VALUES
  *
  * @attention Any derived classes must define a public constant
- * VALUES containing the valid values.
+ * `VALUES` containing the valid values.
  *
- * @date Last reviewed 2021-06-08
+ * @date Last reviewed 2025-10-08
  */
 abstract class AbstractEnum extends ReadonlyStringObject
 {

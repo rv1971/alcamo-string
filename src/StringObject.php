@@ -2,7 +2,7 @@
 
 namespace alcamo\string;
 
-use alcamo\exception\{OutOfRange, ReadonlyViolation};
+use alcamo\exception\{OutOfRange, Unsupported};
 
 /**
  * @namespace alcamo::string
@@ -16,7 +16,7 @@ use alcamo\exception\{OutOfRange, ReadonlyViolation};
  * All positions are counted in bytes, not in characters. This makes a
  * difference for UTF-8 strings.
  *
- * @date Last reviewed 2021-06-08
+ * @date Last reviewed 2025-10-08
  */
 class StringObject implements \ArrayAccess, \Countable
 {
@@ -70,10 +70,14 @@ class StringObject implements \ArrayAccess, \Countable
 
     public function offsetUnset($offset)
     {
-        /** @throw alcamo::exception::ReadonlyViolation in every invocation
+        /** @throw alcamo::exception::Unsupported in every invocation
          *  since unsetting single positions is not supported. */
-        throw new ReadonlyViolation(
-            'Attempt to use ' . __CLASS__ . '::' . __FUNCTION__ . '()'
+        throw (new Unsupported())->setMessageContext(
+            [
+                'feature' => 'Unsetting bytes in a string',
+                'inData' => $this->text_,
+                'atOffset' => $offset
+            ]
         );
     }
 }

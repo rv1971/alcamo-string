@@ -4,6 +4,8 @@ namespace alcamo\string;
 
 /**
  * @brief Expand placeholders in a text
+ *
+ * @date Last reviewed 2025-10-08
  */
 class Expander
 {
@@ -11,14 +13,18 @@ class Expander
     public const MAKE_FORMAT = '$(%s)';
     public const PSR3_FORMAT = '{%s}';
 
+    public const DEFAULT_FORMAT = self::PSR3_FORMAT;
+
     private $replaceMap_ = []; ///< Map of strings to replacement strings
 
+    /// Convenience function
     public static function simpleExpand(
         string $text,
         iterable $data,
-        string $format = self::PSR3_FORMAT
+        ?string $format = null
     ): string {
-        return (new static($data, $format))->expand($text);
+        return (new static($data, $format ?? self::DEFAULT_FORMAT))
+            ->expand($text);
     }
 
     /**
@@ -29,8 +35,12 @@ class Expander
      */
     public function __construct(
         iterable $data,
-        string $format = self::PSR3_FORMAT
+        ?string $format = null
     ) {
+        if (!isset($format)) {
+            $format = self::DEFAULT_FORMAT;
+        }
+
         foreach ($data as $key => $value) {
             $this->replaceMap_[sprintf($format, $key)] = $value;
         }

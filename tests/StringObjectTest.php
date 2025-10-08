@@ -3,7 +3,7 @@
 namespace alcamo\string;
 
 use PHPUnit\Framework\TestCase;
-use alcamo\exception\{OutOfRange, ReadonlyViolation};
+use alcamo\exception\{OutOfRange, Unsupported};
 
 class StringObjectTest extends TestCase
 {
@@ -48,11 +48,13 @@ class StringObjectTest extends TestCase
     {
         $string = new StringObject('consetetur sadipscing elitr');
 
-        $this->expectException(ReadonlyViolation::class);
+        $this->expectException(Unsupported::class);
         $this->expectExceptionMessage(
-            'Attempt to use ' . StringObject::class . '::offsetUnset()'
+            '"Unsetting bytes in a string" not supported '
+                . 'in "consetetur sadipscing elitr" at offset 3 '
+                . '("setetur sadipscing elitr")'
         );
 
-        unset($string[0]);
+        unset($string[3]);
     }
 }
