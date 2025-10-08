@@ -3,7 +3,7 @@
 ## Class `StringObject`
 
 Class that behaves much like a string, providing implicit conversion
-to string, count() and `[]` operations. Useful because derived classes
+to string, `count()` and `[]` operations. Useful because derived classes
 can add methods to such "strings".
 
 ## Class `ReadonlyStringObject`
