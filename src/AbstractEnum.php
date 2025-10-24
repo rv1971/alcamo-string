@@ -15,7 +15,7 @@ use alcamo\exception\InvalidEnumerator;
  */
 abstract class AbstractEnum extends ReadonlyStringObject
 {
-    public const VALUES = [];
+    public const VALUES = []; ///< Valid enumerators
 
     public function __construct(string $value)
     {

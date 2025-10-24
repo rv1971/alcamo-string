@@ -17,7 +17,13 @@ class Expander
 
     private $replaceMap_ = []; ///< Map of strings to replacement strings
 
-    /// Convenience function
+    /**
+     * @brief Convenience function expanding $text
+     *
+     * @param $text Text that may contain placholders.
+     *
+     * @copydetails expand()
+     */
     public static function simpleExpand(
         string $text,
         iterable $data,
@@ -31,7 +37,8 @@ class Expander
      * @param $data map of placeholder names to values.
      *
      * @param $format sprintf()-format containing one `%s` which will be
-     * replaced by placeholder names.
+     * replaced by placeholder names. The above FORMAT constants may be used
+     * for this.
      */
     public function __construct(
         iterable $data,
